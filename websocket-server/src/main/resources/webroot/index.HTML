@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+  <title>WebSocket Test</title>
+  <script>
+    var socket;
+
+    function initSocket() {
+      if (socket !== undefined) {
+        if (socket.readyState === WebSocket.OPEN) {
+          socket.close();
+        }
+      }
+      if (window.WebSocket) {
+        var wsAddress = document.getElementById("ws").value;
+        socket = new WebSocket(wsAddress);
+        socket.onmessage = function (ev) {
+          alert("Received msg from websocket: " + ev.data);
+        };
+        socket.onopen = function (ev) {
+          alert("WebSocket opened! " + ev.data);
+        };
+        socket.onclose = function (ev) {
+          alert("WebSocket closed! " + ev.data);
+        };
+      } else {
+        alert("Your browser does not support websocket.");
+      }
+    }
+
+    function send() {
+      if (!window.WebSocket) {
+        alert("Your browser does not support websocket.");
+      } else if (socket.readyState === WebSocket.OPEN) {
+        socket.send(document.getElementById("msg").value);
+      } else {
+        alert("The websocket is not open!");
+      }
+    }
+  </script>
+</head>
+<body>
+<label for="ws">WebSocket Address: </label><input id="ws" name="ws" type="text"/>
+<button onclick="initSocket()">connect</button>
+<br/>
+<label for="msg">Message: </label><input id="msg" name="msg" type="text"/>
+<button onclick="send()">Click</button>
+</body>
+</html>
