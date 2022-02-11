@@ -11,7 +11,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <vertx-core.version>3.6.3</vertx-core.version>
+    <vertx-core.version>3.9.4</vertx-core.version>
   </properties>
 
   <dependencies>
